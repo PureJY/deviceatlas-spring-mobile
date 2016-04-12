@@ -1,0 +1,20 @@
+---
+spring:
+  profiles:
+    active: prod
+deviceatlas:
+  # Mandatory field
+  licenceKey: <PUT YOUR LICENCE KEY>
+  # Optional fields
+  autoServerRankingNumRequests: 3
+  autoServerRankingMaxFailures: 1
+  autoServerRanking: true
+  serverRankingLifetime: 86400
+  useCache: true
+  useClientCookie: true
+  cloudServiceTimeout: 3
+  endPointUrls:
+    - http://region0.deviceatlascloud.com:80
+    - http://region1.deviceatlascloud.com:80
+    - http://region2.deviceatlascloud.com:80
+    - http://region3.deviceatlascloud.com:80

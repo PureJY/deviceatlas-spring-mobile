@@ -1,0 +1,34 @@
+apply plugin: 'spring-boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+    }
+}
+
+jar {
+    manifest {
+            attributes("Specification-Title": "DeviceAtlas Cloud Java / Spring Mobile Plugin / Example (JRE v1.6)",
+            "Specification-Version": "0.1.0",
+            "Specification-Vendor": "Afilias Technologies Ltd",
+            "Implementation-Title": "DeviceAtlas Cloud Java / Spring Mobile Plugin / Example (JRE v1.6)",
+            "Implementation-Version": "0.1.0",
+            "Class-Path": configurations.runtime.files.collect { it.name }.join(' '),
+            "Implementation-Vendor": "Afilias Technologies Ltd")
+    }
+
+    baseName = 'deviceatlas-spring-mobile-example'
+    version = '0.1.0'
+}
+
+dependencies {
+    compile "com.deviceatlas:deviceatlas-spring-mobile-extension:0.1.0"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf:1.3.2.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-web:1.3.2.RELEASE"
+    compile("javax.servlet:javax.servlet-api:3.1.0")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

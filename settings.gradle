@@ -1,0 +1,3 @@
+rootProject.name="deviceatlas-spring-mobile"
+include "deviceatlas-spring-mobile-extension"
+include "deviceatlas-spring-mobile-example"

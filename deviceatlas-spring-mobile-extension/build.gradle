@@ -1,0 +1,90 @@
+apply plugin: 'java'
+apply plugin: 'sonar-runner'
+apply plugin: 'jacoco'
+apply plugin: 'findbugs'
+apply plugin: 'spring-boot'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+bootRepackage { enabled = false }
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.mobile:spring-mobile-device:${springMobileVersion}")
+    compile("com.deviceatlas:deviceatlas-cloud-java-client:2.0.0")
+    compile("net.sf.ehcache:ehcache-core:2.6.6")
+    compile("javax.persistence:persistence-api:1.0.2")
+    testCompile("junit:junit:4.12")
+    testCompile("javax.servlet:javax.servlet-api:3.1.0")
+    testCompile 'org.springframework:spring-test:4.2.5.RELEASE'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDirs = ['src/test/resources','config']
+        }
+    }
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "${sonarHostUrl}"
+        property "sonar.jdbc.url", "${sonarJdbcUrl}"
+        property "sonar.jdbc.driverClassName", "${sonarJdbcDriverClassName}"
+        property "sonar.jdbc.username", "${sonarJdbcUsername}"
+        property "sonar.jdbc.password", "${sonarJdbcPassword}"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+test {
+    if (project.hasProperty("licenceKey")) {
+        systemProperty "licenceKey", licenceKey
+    } else {
+	exclude "**/*.*"
+        print("for the unit tests, you need to launch ./gradlew <options> <task> -PlicenceKey=<YOUR LICENCE>\n")
+    }
+}
+
+jar {
+    manifest {
+        attributes("Specification-Title": "DeviceAtlas Cloud Spring Mobile (JRE v" + sourceCompatibility + ")",
+                "Specification-Version": version,
+                "Specification-Vendor": "Afilias Technologies Ltd",
+                "Implementation-Title": "DeviceAtlas Cloud Spring Mobile (JRE v" + sourceCompatibility + ")",
+                "Implementation-Version": version,
+                "Class-Path": configurations.runtime.files.collect { it.name }.join(' '),
+                "Implementation-Vendor": "Afilias Technologies Ltd")
+    }
+}
+

@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.deviceatlas</groupId>
+  <artifactId>deviceatlas-spring-mobile-extension</artifactId>
+  <version>0.1.0</version>
+  <name>DeviceAtlas Cloud Spring Mobile Extension</name>
+  <description>A Spring Mobile extension implementing DeviceResolver and Device interfaces with DeviceAtlas intelligence. 
+      The extension provides accurate identification of mobile, tablet, non-human traffic.</description>
+  <url>https://deviceatlas.com</url>
+  <packaging>jar</packaging>
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>DeviceAtlas Team</name>
+            <email>da.tech@deviceatlas.com</email>
+            <organization>Afilias Technologies Ltd</organization>
+            <organizationUrl>https://afilias.info/mobile</organizationUrl>
+        </developer>
+        <developer>
+            <name>David Carlier</name>
+            <email>dcarlier@afilias.info</email>
+        </developer>
+        <developer>
+            <name>Francisco Hernandez</name>
+            <email>fhernand@afilias.info</email>
+        </developer>
+        <developer>
+            <name>Gustavo Franke</name>
+            <email>gfranke@afilias.info</email>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:afilias-technologies/deviceatlas-spring-mobile.git</connection>
+        <developerConnection>scm:git:git@github.com:afilias-technologies/deviceatlas-spring-mobile.git</developerConnection>
+        <url>git@github.com:afilias-technologies/deviceatlas-spring-mobile.git</url>
+    </scm>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.deviceatlas</groupId>
+            <artifactId>deviceatlas-cloud-java-client</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.2.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>1.2.7.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mobile</artifactId>
+            <version>1.2.7.RELEASE</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>true</fork>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
